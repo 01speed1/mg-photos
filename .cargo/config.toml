@@ -1,0 +1,54 @@
+[build]
+# target = "armv7-linux-androideabi"
+
+[target.armv7-linux-androideabi]
+rustflags = [
+  "-C",
+  "link-arg=-L/home/oscar/Projects/mg-photos",
+  "-C",
+  "link-arg=-Wl,--undefined=posix_memalign",
+  "-C",
+  "link-arg=-Wl,--undefined=dl_iterate_phdr",
+  "-C",
+  "link-arg=-Wl,--undefined=signal",
+  "-C",
+  "link-arg=-Wl,--undefined=getauxval",
+  "-C",
+  "link-arg=-lc",
+  "-C",
+  "link-arg=-lm",
+  "-C",
+  "link-arg=-lgcc",
+  "-C",
+  "link-arg=-Wl,--hash-style=sysv",
+  "-C",
+  "panic=abort",
+  "-C",
+  "link-arg=-fno-stack-protector",             # Desactiva protección de pila moderna
+  "-C",
+  "target-feature=-neon",                      # Desactiva instrucciones multimedia pesadas
+  "-C",
+  "target-cpu=generic",                        # No asumas un procesador potente
+  "-C",
+  "link-arg=-Wl,--as-needed",                  # Limpia dependencias fantasma
+  "-C",
+  "link-arg=-static-libgcc",                   # Incluye librerías básicas dentro del binario
+  "-C",
+  "relocation-model=static",                   # Evita que el cargador tenga que mover código
+]
+
+linker = "/home/oscar/android-toolchain-arm15/bin/arm-linux-androideabi-gcc"
+ar = "/home/oscar/android-toolchain-arm15/bin/arm-linux-androideabi-ar"
+[env]
+CC_armv7-linux-androideabi = "/home/oscar/android-toolchain-arm15/bin/arm-linux-androideabi-gcc"
+AR_armv7-linux-androideabi = "/home/oscar/android-toolchain-arm15/bin/arm-linux-androideabi-ar"
+CFLAGS_armv7-linux-androideabi = "-DSIZE_MAX=0xffffffff -D__ANDROID_API__=15"
+
+[profile.dev]
+panic = "abort"
+opt-level = 1
+
+[profile.release]
+panic = "abort"
+lto = true        # Optimiza el tamaño
+codegen-units = 1 # Mejora la optimización

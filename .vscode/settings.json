@@ -1,0 +1,23 @@
+{
+  "cSpell.words": [
+    "androideabi",
+    "armv",
+    "CFLAGS",
+    "codegen",
+    "DSIZE",
+    "getauxval",
+    "lgcc",
+    "libgcc",
+    "memalign",
+    "minreq",
+    "nocopyreloc",
+    "oscar",
+    "phdr",
+    "posix",
+    "rustflags",
+    "rustls",
+    "serde",
+    "sysv",
+    "ureq"
+  ]
+}
